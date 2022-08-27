@@ -6,3 +6,5 @@ A Rollergames playfild was turned into a hybrid pinball machine (pinball firmwar
 The emulator Pinmame runs on a Raspberry Pi and controls sound, DMD and a few IO-boards underneath the playfield. These in turn read the switch positions and activates the coils and lamps.
 
 ![overview](./Documentation/overview.png)
+
+![Playfield and DMD](total_splash.png)
