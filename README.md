@@ -7,4 +7,4 @@ The emulator Pinmame runs on a Raspberry Pi and controls sound, DMD and a few IO
 
 ![overview](./Documentation/overview.png)
 
-![Playfield and DMD](total_splash.png)
+![Playfield and DMD](./Documentation/total_splash.png)
