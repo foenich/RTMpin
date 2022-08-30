@@ -9,8 +9,4 @@ The emulator PinMAME runs on a Raspberry Pi and controls sound, DMD and a few IO
 
 ![Playfield and DMD](./Documentation/total_splash.png)
 
-Watch a Video:
-
-<video width="608" height="1280" controls>
-  <source src="./Documentation/rg1stgame.mp4" type="video/mp4">
-</video>
+To watch a video see documentation folder: rg1stgame.mp4
