@@ -1,4 +1,4 @@
-Änderungen an RTMPIN 0.1:
+Änderungen an RTMPIN 0.1.0:
 C24 nach rechts (Zugang für USB-Stecker)
 C32 nach unten bzw. U4 nach oben (BlackPill steht unten über und berührt C32)
 U2, U5, U7: 74LVC14 ggf in anderem Gehäuse (z.B. TSSOP14) weil besser verfügbar
