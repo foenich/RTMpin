@@ -1,8 +1,8 @@
-Änderungen an RTMPIN 0.1.0:
-C24 nach rechts (Zugang für USB-Stecker)
-C32 nach unten bzw. U4 nach oben (BlackPill steht unten über und berührt C32)
-U2, U5, U7: 74LVC14 ggf in anderem Gehäuse (z.B. TSSOP14) weil besser verfügbar
-Rx mit Tx tauschen (am RS485-Treiber)
-Pull down statt pull up an nRE/DE des RS485
+# Todos for next version (after RTMPIN 0.1.0):
+* move C24 a bit to the right (access for USB-connector)
+* move C32 down or U4 up (BlackPill exaggerates the DIP-Socket at the bottom side an conflicts with C32)
+* U2, U5, U7: may use a different houseing for 74LVC14 (e.g. TSSOP14), because better available
+* Exchange Rx and Tx at RS485-driver to the STM-controller
+* Use a pull down instead a pull up at nRE/DE of RS485
 
 
