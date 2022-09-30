@@ -1,0 +1,11 @@
+-----------V0.1.1------------------------------------------------------
+changed pads form handsolder to standard
+Rx/Tx corrected (swaped)
+moved C24 a bit to the right (access for USB-connector)
+moved U4 up (BlackPill exaggerates the DIP-Socket at the bottom side an conflicts with C32)
+pull down instead of a pull up at nRE/DE of RS485
+bigger mounting holes
+
+
+-----------V0.1.0------------------------------------------------------
+first shot
