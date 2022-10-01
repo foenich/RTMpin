@@ -1,3 +1,3 @@
-# Todos for next version (after RTMPIN 0.1.0):
+# Todos for next version:
 * U2, U5, U7: may use a different housing for 74LVC14 (e.g. TSSOP14), because better available
 
