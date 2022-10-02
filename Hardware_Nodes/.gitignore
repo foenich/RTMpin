@@ -14,3 +14,7 @@ _autosave-*
 *-save.kicad_pcb
 fp-info-cache
 
+#Gerber
+./RTMPin_CAE/Gerber/
+*.gbr
+
