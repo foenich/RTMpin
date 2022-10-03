@@ -1,4 +1,4 @@
-update=Fr 30 Sep 2022 23:54:31 CEST
+update=Mo 03 Okt 2022 16:30:25 CEST
 version=1
 last_client=kicad
 [general]
