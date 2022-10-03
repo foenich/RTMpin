@@ -6,7 +6,7 @@ moved U4 up (BlackPill exaggerates the DIP-Socket at the bottom side an conflict
 pull down instead of a pull up at nRE/DE of RS485
 bigger mounting holes
 moved all part to top side
-
+changed TVS to unipolar
 
 
 -----------V0.1.0------------------------------------------------------
