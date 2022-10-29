@@ -16,5 +16,6 @@ fp-info-cache
 
 #Gerber and others
 RTMPin_CAE/ProductionData/
+RTMPin_CAE/Gerber/
 
 
