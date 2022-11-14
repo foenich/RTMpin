@@ -343,7 +343,7 @@ int main(void)
 
 		/* ---------- SW update  ----------- */
 
-		if (rxBufferUpdated && (nodeStatus == 3) ) /* Software update of other node */
+		if ( nodeStatus == 3 ) /* Software update of other node */
 		{
 			  NVIC_DisableIRQ(USART1_IRQn);
 			  /* All outputs off */
