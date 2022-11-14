@@ -268,6 +268,7 @@ int main(void)
   uint32_t stReload;
   uint32_t stNow, stOld;
   uint32_t stTicks = 0;
+  uint32_t flipperPulse = 0;
   uint32_t readyToSendCounter = 0;
   uint32_t packetWatchDog = 0;
 
@@ -498,9 +499,19 @@ int main(void)
 
 		/* right flipper Button pressed and enabled, don't use
 		 * txSwitchesByte1 here (as they stay 1 until transferred to Pi) */
-		( (LL_GPIO_IsInputPinSet (GPIOA, LL_GPIO_PIN_15)) && ((rxBuffer[1]>>7)&1) ) ?
-			LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH3) : LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH3);
-
+		if ( (LL_GPIO_IsInputPinSet (GPIOA, LL_GPIO_PIN_15)) && ((rxBuffer[1]>>7)&1) )
+		{
+			LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH3);
+		}
+		else
+		{
+			if (flipperPulse > 420000) /* minimum on time is 5 ms to debounce flipper button (if it bounces the flipper doesn't get full power) */
+			{
+				LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH3);
+				flipperPulse = 0;
+			}
+		}
+		if ( LL_TIM_CC_IsEnabledChannel(TIM4, LL_TIM_CHANNEL_CH3) ) flipperPulse += stTicks;
 
 		/* send status to Pi, currently only switch states */
 		if ( nodeStatus == 1 )

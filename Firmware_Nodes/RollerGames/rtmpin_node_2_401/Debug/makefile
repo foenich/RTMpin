@@ -60,8 +60,8 @@ all: main-build
 main-build: rtmpin_node_2_401.elf secondary-outputs
 
 # Tool invocations
-rtmpin_node_2_401.elf: $(OBJS) $(USER_OBJS) /home/mw/STM32CubeIDE/workspace_1.8.0/rtmpin_node_2_401/STM32F401CCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "rtmpin_node_2_401.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/mw/STM32CubeIDE/workspace_1.8.0/rtmpin_node_2_401/STM32F401CCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="rtmpin_node_2_401.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+rtmpin_node_2_401.elf: $(OBJS) $(USER_OBJS) /home/mw/Dokumente/Flipper/DIY_Flipper/git_RTMpin/RTMpin/Firmware_Nodes/RollerGames/rtmpin_node_2_401/STM32F401CCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "rtmpin_node_2_401.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/mw/Dokumente/Flipper/DIY_Flipper/git_RTMpin/RTMpin/Firmware_Nodes/RollerGames/rtmpin_node_2_401/STM32F401CCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="rtmpin_node_2_401.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

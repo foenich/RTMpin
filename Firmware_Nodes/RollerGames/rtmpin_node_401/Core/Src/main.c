@@ -273,6 +273,7 @@ int main(void)
   uint32_t stNow, stOld;
   uint32_t stTicks = 0;
   uint32_t slingPulse = 0;
+  uint32_t flipperPulse = 0;
   uint32_t readyToSendCounter = 0;
   uint32_t packetWatchDog = 0;
 
@@ -342,7 +343,7 @@ int main(void)
 
 		/* ---------- SW update  ----------- */
 
-		if (rxBufferUpdated && (nodeStatus == 3) ) /* Software update of other node */
+		if ( nodeStatus == 3 )  /* Software update of other node */
 		{
 			  NVIC_DisableIRQ(USART1_IRQn);
 			  /* All outputs off */
@@ -541,8 +542,14 @@ int main(void)
 		}
 		else
 		{
-			LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH3);
+			if (flipperPulse > 420000) /* minimum on time is 5 ms to debounce flipper button (if it bounces the flipper doesn't get full power) */
+			{
+				LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH3);
+				flipperPulse = 0;
+			}
 		}
+		if ( LL_TIM_CC_IsEnabledChannel(TIM4, LL_TIM_CHANNEL_CH3) ) flipperPulse += stTicks;
+
 		/* rising edge of right sling shot switch */
 		if ( ((txSwitchesByte2>>7)&1) && !((prevTxSwitchByte2>>7)&1) && ((rxBuffer[1]>>3)&1) && !slingPulse )
 		{
