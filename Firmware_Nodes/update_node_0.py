@@ -26,9 +26,6 @@ nodeNrAndLength = 0x0f #node address (1. nibble) and length (2. nibble); length 
 
 try:
 
-#    with open('/home/mw/STM32CubeIDE/workspace_1.8.0/rtmpin_node_401/Debug/rtmpin_node_0_401.bin', 'rb') as f:
-#     with open('/home/mw/STM32CubeIDE/workspace_1.8.0/blink_fast/Debug/blink_fast.bin', 'rb') as f:
-#     with open('/home/mw/temp/test.bin', 'rb') as f:
     with open('./rtmpin_node_0_401.bin', 'rb') as f:
         crc32of_f = 0xFFFFFFFF
         crc_table = create_table()

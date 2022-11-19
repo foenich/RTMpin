@@ -445,8 +445,9 @@ int main(void)
 			((rxBuffer[1]>>7)&1) ?
 				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH3) : LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH3);*/
 			/* OB9 */
-			((rxBuffer[1]>>6)&1) ?
-				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH4) : LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH4);
+	        /* top diverter -> alwas off */
+			/*((rxBuffer[1]>>6)&1) ?
+				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH4) : LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH4);*/
 			/* OB1 */
 			/* Flasher 7 */
 			((rxBuffer[1]>>5)&1) ?

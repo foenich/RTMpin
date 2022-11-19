@@ -26,7 +26,7 @@ nodeNrAndLength = 0x1f #node address (1. nibble) and length (2. nibble); length 
 
 try:
 
-    with open('./rtmpin_node_1_401.bin', 'rb') as f:
+    with open('./JD_node_1_401.bin', 'rb') as f:
         crc32of_f = 0xFFFFFFFF
         crc_table = create_table()
         frame16 = f.read(16)

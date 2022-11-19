@@ -274,6 +274,9 @@ int main(void)
   uint32_t stTicks = 0;
   uint32_t slingPulse = 0;
   uint32_t flipperPulse = 0;
+  uint32_t outholePulse = 0;
+  uint32_t lockkickPulse = 0;
+  uint32_t diverterPulse = 0;
   uint32_t readyToSendCounter = 0;
   uint32_t packetWatchDog = 0;
 
@@ -499,11 +502,13 @@ int main(void)
 			((rxBuffer[1]>>7)&1) ?
 				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH3) : LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH3);*/
 			/* OB9 */
-			((rxBuffer[1]>>6)&1) ?
-				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH4) : LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH4);
+	        /* magnet not used in JD */
+			/*((rxBuffer[1]>>6)&1) ?
+				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH4) : LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH4);*/
 			/* OB1 */
-			((rxBuffer[1]>>5)&1) ?
-				LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH4) : LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH4);
+			/* outhole kicker controlled directly */
+			/*((rxBuffer[1]>>5)&1) ?
+				LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH4) : LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH4);*/
 			/* OB6 */
 			((rxBuffer[1]>>4)&1) ?
 				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH1) : LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH1);
@@ -512,11 +517,13 @@ int main(void)
 			/*((rxBuffer[1]>>3)&1) ?
 				LL_TIM_CC_EnableChannel (TIM4, LL_TIM_CHANNEL_CH2) : LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH2);*/
 			/* OA6 */
-			((rxBuffer[1]>>2)&1) ?
-				LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH1) : LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH1);
+			/* Lock diverter controlled directly  */
+			/*((rxBuffer[1]>>2)&1) ?
+				LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH1) : LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH1);*/
 			/* OA7 */
-			((rxBuffer[1]>>1)&1) ?
-				LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH2) : LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH2);
+			/* Lock kickback controlled directly */
+			/*((rxBuffer[1]>>1)&1) ?
+				LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH2) : LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH2);*/
 			/* OB0 */
 			((rxBuffer[1]>>0)&1) ?
 				LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH3) : LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH3);
@@ -573,6 +580,36 @@ int main(void)
 		if ( slingPulse ) slingPulse += stTicks;
 		if ( slingPulse > 3360000 ) LL_TIM_CC_DisableChannel (TIM4, LL_TIM_CHANNEL_CH2); /* 40 ms @ 84 MHz */
 		if ( slingPulse > 33600000 ) slingPulse = 0; /* anti bouncing 400 ms @ 84 MHz */
+
+		/* outhole switch active */
+		if ( ((txSwitchesByte2>>1)&1) && !outholePulse )
+		{
+			outholePulse = 1;
+			LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH4);
+		}
+		if ( outholePulse ) outholePulse += stTicks;
+		if ( outholePulse > 3360000 ) LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH4); /* 40 ms @ 84 MHz */
+		if ( outholePulse > 168e6 ) outholePulse = 0; /* anti bouncing 2 s @ 84 MHz */
+
+		/* Lock 1 switch active */
+		if ( ((txSwitchesByte1>>1)&1) && !lockkickPulse )
+		{
+			lockkickPulse = 1;
+			LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH2);
+		}
+		if ( lockkickPulse ) lockkickPulse += stTicks;
+		if ( lockkickPulse > 3360000 ) LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH2); /* 40 ms @ 84 MHz */
+		if ( lockkickPulse > 168e6 ) lockkickPulse = 0; /* anti bouncing 2 s @ 84 MHz */
+
+		/* Ramp Lock Entry switch active */
+		if ( ((rxBuffer[8]>>5)&1) && !diverterPulse )
+		{
+			diverterPulse = 1;
+			LL_TIM_CC_EnableChannel (TIM3, LL_TIM_CHANNEL_CH1);
+		}
+		if ( diverterPulse ) lockkickPulse += stTicks;
+		if ( diverterPulse > 3360000 ) LL_TIM_CC_DisableChannel (TIM3, LL_TIM_CHANNEL_CH1); /* 40 ms @ 84 MHz */
+		if ( diverterPulse > 168e6 ) diverterPulse = 0; /* anti bouncing 2 s @ 84 MHz */
 
 
 		/* send status to Pi, currently only switch states */

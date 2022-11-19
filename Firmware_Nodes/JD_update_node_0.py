@@ -22,11 +22,11 @@ def crc32(bytestream, startval):
 ser = serial.Serial('/dev/ttyUSB0', 115200, serial.EIGHTBITS, serial.PARITY_NONE, serial.STOPBITS_ONE)
 print (ser.portstr)       #check which port was really used
 
-nodeNrAndLength = 0x1f #node address (1. nibble) and length (2. nibble); length 0xf becomes 16 in softwareupdate
+nodeNrAndLength = 0x0f #node address (1. nibble) and length (2. nibble); length 0xf becomes 16 in softwareupdate
 
 try:
 
-    with open('./rtmpin_node_1_401.bin', 'rb') as f:
+    with open('./JD_Node_0_401.bin', 'rb') as f:
         crc32of_f = 0xFFFFFFFF
         crc_table = create_table()
         frame16 = f.read(16)
